@@ -33,6 +33,7 @@ namespace ERPProject.View
                 MessageDialogStyle.AffirmativeAndNegative,null);
             if (result==MessageDialogResult.Affirmative) //위 비동기 프로그램에서 예를 눌렀을때의 조건식
             {
+                Commons.LOGGER.Info("프로그램 종료");
                 Application.Current.Shutdown();//프로그램 종료 
             }
 
@@ -65,7 +66,7 @@ namespace ERPProject.View
                 BtnLogin_Click(sender, e);//로그인 버튼 클릭
         }
 
-        private void BtnLogin_Click(object sender, RoutedEventArgs e)
+        private async void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
             LblResult.Visibility = Visibility.Hidden;
 
@@ -83,31 +84,38 @@ namespace ERPProject.View
                 var email = TxtUserEmail.Text;
                 var password = TxtUserPass.Password;
                 var isOurUser = Logic.DataAccess.Getusers()
-                    .Where(u => u.UserEmail.Equals(email) && u.UserPassword.Equals(password)).Count();//
+                    .Where(u => u.UserEmail.Equals(email) && u.UserPassword.Equals(password)
+                                && u.UserActivated ==true).Count();//
                 // Logic이라는 폴더를 생성하고 그 후에 dataAccess라는 클래스를 만든 뒤에 DB데이터를 저장
                 // isOurUser이라는 변수에 우리가 사용할 데이터만 뽑음
                 // Where절이 바로 linq식으로 우리가 사용할 데이터를 뽑는 절이다.
                 // linq절 마지막에 count는 DB상의 메일과 패스워드를 방금 친 메일, 패스워드와 비교하여 동일한것이 있을때 개수를 올리는 역할을 한다.
                 // 동일한 것이 없을때 개수가 0이 됨으로 밑에 if문에서 사용자가 존재하지 않습니다를 뜨게한다.
+                
+                // 이메일,패스워드뿐만 아니라 useractivated도 검사해줘야한다.
+
                 if (isOurUser == 0)
                 {
                     LblResult.Visibility = Visibility.Visible;
                     LblResult.Content = "아이디나 패스워드가 일치하지 않습니다.";
+                    Commons.LOGGER.Warn("아이디/패스워드가 불일치");
                     return;
                 }
                 else
                 {
                     Commons.LOGINED_USER = Logic.DataAccess.Getusers().Where(u => u.UserEmail.Equals(email)).FirstOrDefault();
+                    Commons.LOGGER.Info($"{email} 접속성공");
                     //FirstOrDefault는 같은 계정이 여러개 잇는 것이 아니기때문에 맞는 아이디의 경우 아이디를 반환하고 아닌 경우에는 null을 반환한다.
                     this.Visibility = Visibility.Hidden; //아이디 패스워드가 맞기 때문에 로그인 창을 사라지게 해주는 작업
                     
                 }
-                //여기까지 210329 영상 5:10에서 마침
 
             }
             catch (Exception ex)
             {
                 //예외처리
+                Commons.LOGGER.Error($"예외발생 : {ex}");
+                await this.ShowMessageAsync("예외", $"예외발생 {ex}");
             }
         }
     }

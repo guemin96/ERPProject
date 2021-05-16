@@ -10,7 +10,14 @@
     mc:Ignorable="d"
     Title="ERPSYSTEM" Height="700" Width="1200" 
     Icon="/Resources/stock.png"
-    ContentRendered="MetroWindow_ContentRendered">
+    ContentRendered="MetroWindow_ContentRendered"
+    WindowStartupLocation="CenterScreen"
+    Activated="MetroWindow_Activated">
+    <mah:MetroWindow.RightWindowCommands>
+        <mah:WindowCommands>
+            <Button x:Name="BtnLoginedId"/>
+        </mah:WindowCommands>
+    </mah:MetroWindow.RightWindowCommands>
     <DockPanel>
         <Grid DockPanel.Dock="Top" Height="70">
             <Grid.ColumnDefinitions>
@@ -113,7 +120,7 @@
                     Grid.Column="6" Content="계정"
                     FontSize="14" Foreground="White"
                     Background="CornflowerBlue"
-                    Margin="5,10">
+                    Margin="5,10" Click="BtnAccount_Click">
                 <Button.ContentTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -127,7 +134,7 @@
                     Grid.Column="7" Content="로그아웃"
                     FontSize="14" Foreground="White"
                     Background="Gray"
-                    Margin="5,10">
+                    Margin="5,10" Click="BtnLogout_Click">
                 <Button.ContentTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -142,7 +149,7 @@
 
         </Grid>
         <Grid Background="WhiteSmoke">
-            <ContentControl x:Name="ActiveControl"/> <!--화면전환-->
+            <Frame x:Name="ActiveControl"/> <!--화면전환//ContentControl을 Frame으로 바꾸고 작업  -->
             
         </Grid>
 
