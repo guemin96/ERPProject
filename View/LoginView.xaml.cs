@@ -3,6 +3,7 @@ using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -83,6 +84,15 @@ namespace ERPProject.View
             {
                 var email = TxtUserEmail.Text;
                 var password = TxtUserPass.Password;
+                /*
+                로그인 자체는 완성이 되었지만 해킹을 방지하기 위해 우리는 해쉬 암호화함수를 만들었고 이 부분에서 
+                우리가 친 비밀번호를 암호화된 문자로 바꾸어줘서 로그인을 할 수 있게 만들어준다.
+                */
+                var mdHash = MD5.Create();
+                password = Commons.GetMd5Hash(mdHash, password);
+                // 이 함수를 통해 우리는 비밀번호가 암호화되었지만 로그인이 될 수 있는 
+
+
                 var isOurUser = Logic.DataAccess.Getusers()
                     .Where(u => u.UserEmail.Equals(email) && u.UserPassword.Equals(password)
                                 && u.UserActivated ==true).Count();//

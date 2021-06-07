@@ -49,7 +49,7 @@
                     Foreground="White"
                     Content="계정정보 수정" 
                     Height="50" Margin="5,10"
-                    Loaded="BtnEditMyAccount_Loaded">
+                    Loaded="BtnEditMyAccount_Loaded" Click="BtnEditMyAccount_Click">
                 
             </Button>
         </StackPanel>
@@ -82,8 +82,8 @@
             <!--이것 역시 위에서 스타일을 지정해뒀기 바로 적용이된다(18번줄 참고)-->
             <TextBlock Grid.Row="0" Grid.Column="1" x:Name="TxtUserID" Text="UserID"/>
             <TextBlock Grid.Row="1" Grid.Column="1" x:Name="TxtUserIdentityNumber" Text="UserIdentityNumber"/>
-            <TextBlock Grid.Row="2" Grid.Column="1" x:Name="TxtUserName" Text="UserName"/>
-            <TextBlock Grid.Row="3" Grid.Column="1" x:Name="TxtUserSurname" Text="UserSurname"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" x:Name="TxtUserSurname" Text="UserSurname"/>
+            <TextBlock Grid.Row="3" Grid.Column="1" x:Name="TxtUserName" Text="UserName"/>
             <TextBlock Grid.Row="4" Grid.Column="1" x:Name="TxtUserEmail" Text="UserEmail"/>
             <TextBlock Grid.Row="5" Grid.Column="1" x:Name="TxtUserAdmin" Text="UserAdmin"/>
             <TextBlock Grid.Row="6" Grid.Column="1" x:Name="TxtUserActivated" Text="UserActivated"/>

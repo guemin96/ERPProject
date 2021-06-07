@@ -35,7 +35,7 @@
                     Grid.Column="0" Content="입고"
                     FontSize="14" Foreground="White"
                     Background="RoyalBlue"
-                    Margin="5,10">
+                    Margin="5,10" Click="BtnBooks_Click">
                 <Button.ContentTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -44,13 +44,13 @@
                         </StackPanel>
                     </DataTemplate>
                 </Button.ContentTemplate>
-           
+
             </Button>
             <Button x:Name="BtnProducts" 
                     Grid.Column="1" Content="제품"
                     FontSize="14" Foreground="White"
                     Background="LightSkyBlue"
-                    Margin="5,10">
+                    Margin="5,10" Click="BtnProducts_Click">
                 <Button.ContentTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -64,7 +64,7 @@
                     Grid.Column="2" Content="출고"
                     FontSize="14" Foreground="White"
                     Background="DodgerBlue"
-                    Margin="5,10">
+                    Margin="5,10" Click="BtnBookout_Click">
                 <Button.ContentTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -78,7 +78,7 @@
                     Grid.Column="3" Content="창고"
                     FontSize="14" Foreground="White"
                     Background="CadetBlue"
-                    Margin="5,10">
+                    Margin="5,10" Click="BtnStore_Click">
                 <Button.ContentTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -106,7 +106,7 @@
                     Grid.Column="5" Content="사용자"
                     FontSize="14" Foreground="White"
                     Background="LightSteelBlue"
-                    Margin="5,10">
+                    Margin="5,10" Click="BtnUser_Click">
                 <Button.ContentTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -148,9 +148,13 @@
 
 
         </Grid>
-        <Grid Background="WhiteSmoke">
-            <Frame x:Name="ActiveControl"/> <!--화면전환//ContentControl을 Frame으로 바꾸고 작업  -->
-            
+        <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Frame x:Name="ActiveControl" NavigationUIVisibility="Hidden"/>
+            <!--화면전환//ContentControl을 Frame으로 바꾸고 작업  -->
+
         </Grid>
 
     </DockPanel>
